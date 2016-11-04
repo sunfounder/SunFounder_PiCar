@@ -36,7 +36,7 @@ class fileDB(object):
 			for i in range(file_len):
 				if lines[i][0] != '#':
 					if lines[i].split('=')[0].strip() == name:
-						value = lines[i].split('=')[1].replace(' ', '').strip
+						value = lines[i].split('=')[1].replace(' ', '').strip()
 						flag = True
 			if flag:
 				return value
