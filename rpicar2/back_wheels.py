@@ -129,7 +129,7 @@ class Back_Wheels(object):
 		''' Get the front wheels to the calibration position. '''
 		if self._DEBUG:
 			print self._DEBUG_INFO, 'Turn to "Calibration" position'
-		self.speed = 30
+		self.speed = 50
 		self.forward()
 		self.cali_forward_A = self.forward_A
 		self.cali_forward_B = self.forward_B
