@@ -49,7 +49,7 @@ class fileDB(object):
 		"""Set value by data's name. Or create one if the arguement does not exist"""
 
 		# Read the file
-		conf = open(self.db_path,'r')
+		conf = open(self.db,'r')
 		lines=conf.readlines()
 		conf.close()
 		file_len=len(lines)-1
@@ -65,6 +65,6 @@ class fileDB(object):
 			lines.append('%s = %s\n\n' % (name, value))
 
 		# Save the file
-		conf = open(self.db_path,'w')
+		conf = open(self.db,'w')
 		conf.writelines(lines)
 		conf.close()
