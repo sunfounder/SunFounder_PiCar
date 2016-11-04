@@ -27,12 +27,12 @@ class Back_Wheels(object):
 	_DEBUG = False
 	_DEBUG_INFO = 'DEBUG "back_wheels.py":'
 
-	def __init__(self, debug=False):
+	def __init__(self, debug=False, db="config"):
 		''' Init the direction channel and pwm channel '''
 		self.forward_A = True
 		self.forward_B = True
 
-		self.db = filedb.fileDB()
+		self.db = filedb.fileDB(db=db)
 
 		self.forward_A = self.db.get('forward_A', default_value=True)
 		self.forward_B = self.db.get('forward_B', default_value=True)

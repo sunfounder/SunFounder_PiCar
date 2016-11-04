@@ -24,11 +24,9 @@ class Front_Wheels(object):
 	_DEBUG = False
 	_DEBUG_INFO = 'DEBUG "front_wheels.py":'
 
-	def __init__(self, config_file=None):
+	def __init__(self, debug=False, db="config"):
 		''' setup channels and basic stuff '''
-		if self._DEBUG:
-			print self._DEBUG_INFO, "Debug on"
-		self.db = filedb.fileDB()
+		self.db = filedb.fileDB(db=db)
 		self.turning_offset = self.db.get('turning_offset', default_value=0)
 
 		self.wheel = Servo.Servo(self.FRONT_WHEEL_CHANNEL, offset=self.turning_offset)
@@ -37,6 +35,7 @@ class Front_Wheels(object):
 			print self._DEBUG_INFO, 'Front wheel offset value:', self.turning_offset
 
 		self.angle = {"left":self.LEFT_ANGLE, "straight":self.STRAIGHT_ANGLE, "right":self.RIGHT_ANGLE}
+		self.debug = debug
 		if self._DEBUG:
 			print self._DEBUG_INFO, 'left angle: %s, straight angle: %s, right angle: %s' % (self.angle["left"], self.angle["straight"], self.angle["right"])
 
