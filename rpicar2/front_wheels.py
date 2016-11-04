@@ -68,7 +68,13 @@ class Front_Wheels(object):
 			angle = self.angle["right"]
 		self.wheel.write(angle)
 
-	def set_debug(self, debug):
+	
+	@property
+	def debug(self):
+		return self._DEBUG
+
+	@debug.setter
+	def debug(self, debug):
 		''' Set if debug information shows '''
 		if debug in (True, False):
 			self._DEBUG = debug
@@ -78,17 +84,17 @@ class Front_Wheels(object):
 		if self._DEBUG:
 			print self._DEBUG_INFO, "Set debug on"
 			print self._DEBUG_INFO, "Set wheel debug on"
-			self.wheel.set_debug(True)
+			self.wheel.debug = True
 		else:
 			print self._DEBUG_INFO, "Set debug off"
 			print self._DEBUG_INFO, "Set wheel debug off"
-			self.wheel.set_debug(False)
+			self.wheel.debug = False
 
 	def ready(self):
 		''' Get the front wheels to the ready position. '''
 		if self._DEBUG:
 			print self._DEBUG_INFO, 'Turn to "Ready" position'
-		self.wheel.set_offset(self.turning_offset)
+		self.wheel.offset = self.turning_offset
 		self.turn_straight()
 
 	def calibration(self):
@@ -101,13 +107,13 @@ class Front_Wheels(object):
 	def cali_left(self):
 		''' Calibrate the wheels to left '''
 		self.cali_turning_offset -= 1
-		self.wheel.set_offset(self.cali_turning_offset)
+		self.wheel.offset = self.cali_turning_offset
 		self.turn_straight()
 
 	def cali_right(self):
 		''' Calibrate the wheels to right '''
 		self.cali_turning_offset += 1
-		self.wheel.set_offset(self.cali_turning_offset)
+		self.wheel.offset = self.cali_turning_offset
 		self.turn_straight()
 
 	def cali_ok(self):
