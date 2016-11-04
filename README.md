@@ -1,21 +1,21 @@
-## {Repository Name}
-{thing name}
+## SunFounder Raspberry Pi Car V2.0
+Raspberry Pi Car V2.0
 
 Quick Links:
 
- * [About {thing name}](#about_this_{thing})
+ * [About Raspberry Pi Car V2.0](#about_this_repo)
  * [Update](#update)
  * [About SunFounder](#about_sunfounder)
  * [License](#license)
  * [Contact us](#contact_us)
 
 <a id="about_this_{thing}"></a>
-### About {thing name}:
-{discriptions}
+### About Raspberry Pi Car V2.0:
+This is a basic control module for [Smart Video Car Kit V2.0](https://github.com/sunfounder/SunFounder_Smart_Video_Car_Kit_V2.0_for_Raspberry_Pi) and [SunFounder Smart Sensor Car Kit](https://github.com/sunfounder/SunFounder_Smart_Sensor_Car_Kitfor_Raspberry_Pi)
 
 <a id="update"></a>
 ### Update:
-{date}:
+2016-11-04:
  - New Release
 
 ----------------------------------------------
