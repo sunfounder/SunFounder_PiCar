@@ -27,7 +27,7 @@ class Front_Wheels(object):
 	def __init__(self, debug=False, db="config"):
 		''' setup channels and basic stuff '''
 		self.db = filedb.fileDB(db=db)
-		self.turning_offset = self.db.get('turning_offset', default_value=0)
+		self.turning_offset = int(self.db.get('turning_offset', default_value=0))
 
 		self.wheel = Servo.Servo(self.FRONT_WHEEL_CHANNEL, offset=self.turning_offset)
 		if self._DEBUG:
