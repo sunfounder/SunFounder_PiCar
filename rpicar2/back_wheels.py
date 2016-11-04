@@ -8,10 +8,12 @@
 * E-mail      : service@sunfounder.com
 * Website     : www.sunfounder.com
 * Update      : Cavon    2016-09-13    New release
+*               Cavon    2016-11-04    fix for submodules
 **********************************************************************
 '''
 
 import SunFounder_TB6612.TB6612 as TB6612
+import SunFounder_PCA9685.PCA9685 as PCA9685
 import filedb
 
 class Back_Wheels(object):
@@ -25,10 +27,8 @@ class Back_Wheels(object):
 	_DEBUG = False
 	_DEBUG_INFO = 'DEBUG "back_wheels.py":'
 
-	def __init__(self):
+	def __init__(self, debug=False):
 		''' Init the direction channel and pwm channel '''
-		if self._DEBUG:
-			print self._DEBUG_INFO, "Debug on"
 		self.forward_A = True
 		self.forward_B = True
 
@@ -42,20 +42,23 @@ class Back_Wheels(object):
 
 		self.pwm = PCA9685.PWM()
 		self.pwm.frequence = 60
-		left_wheel.pwm  = _set_a_pwm
-		right_wheel.pwm = _set_b_pwm
+		def _set_a_pwm(value):
+			pulse_wide = self.pwm.map(value, 0, 100, 0, 4095)
+			self.pwm.write(self.PWM_A, 0, pulse_wide)
+
+		def _set_b_pwm(value):
+			pulse_wide = self.pwm.map(value, 0, 100, 0, 4095)
+			self.pwm.write(self.PWM_B, 0, pulse_wide)
+
+		self.left_wheel.pwm  = _set_a_pwm
+		self.right_wheel.pwm = _set_b_pwm
 
 		self._speed = 0
 
+		self.debug = debug
 		if self._DEBUG:
 			print self._DEBUG_INFO, 'Set left wheel to #%d, PWM channel to %d' % (self.Motor_A, self.PWM_A)
 			print self._DEBUG_INFO, 'Set right wheel to #%d, PWM channel to %d' % (self.Motor_B, self.PWM_B)
-
-	def _set_a_pwm(self, value):
-		self.pwm.write(self.PWM_A, 0, value)
-
-	def _set_b_pwm(self, value):
-		self.pwm.write(self.PWM_B, 0, value)
 
 	def forward(self):
 		''' Move both wheels forward '''
@@ -86,8 +89,8 @@ class Back_Wheels(object):
 	def speed(self, speed):
 		self._speed = speed
 		''' Set moving speeds '''
-		self.left_wheel.set_speed(self._speed)
-		self.right_wheel.set_speed(self._speed)
+		self.left_wheel.speed = self._speed
+		self.right_wheel.speed = self._speed
 		if self._DEBUG:
 			print self._DEBUG_INFO, 'Set speed to', self._speed
 
@@ -105,28 +108,28 @@ class Back_Wheels(object):
 
 		if self._DEBUG:
 			print self._DEBUG_INFO, "Set debug on"
-			print self._DEBUG_INFO, "Set left wheel and right wheel debug on"
-			self.left_wheel.set_debug(True)
-			self.right_wheel.set_debug(True)
+			self.left_wheel.debug = True
+			self.right_wheel.debug = True
+			self.pwm.debug = True
 		else:
 			print self._DEBUG_INFO, "Set debug off"
-			print self._DEBUG_INFO, "Set left wheel and right wheel debug off"
-			self.left_wheel.set_debug(False)
-			self.right_wheel.set_debug(False)
+			self.left_wheel.debug = False
+			self.right_wheel.debug = False
+			self.pwm.debug = False
 
 	def ready(self):
 		''' Get the back wheels to the ready position. (stop) '''
 		if self._DEBUG:
 			print self._DEBUG_INFO, 'Turn to "Ready" position'
-		self.left_wheel.set_offset(self.forward_A)
-		self.right_wheel.set_offset(self.forward_B)
+		self.left_wheel.offset = self.forward_A
+		self.right_wheel.offset = self.forward_B
 		self.stop()
 
 	def calibration(self):
 		''' Get the front wheels to the calibration position. '''
 		if self._DEBUG:
 			print self._DEBUG_INFO, 'Turn to "Calibration" position'
-		self.set_speed(30)
+		self.speed = 30
 		self.forward()
 		self.cali_forward_A = self.forward_A
 		self.cali_forward_B = self.forward_B
@@ -134,13 +137,13 @@ class Back_Wheels(object):
 	def cali_left(self):
 		''' Reverse the left wheels forward direction in calibration '''
 		self.cali_forward_A = not self.cali_forward_A
-		self.left_wheel.set_offset(self.cali_forward_A)
+		self.left_wheel.offset = self.cali_forward_A
 		self.forward()
 
 	def cali_right(self):
 		''' Reverse the right wheels forward direction in calibration '''
 		self.cali_forward_B = not self.cali_forward_B
-		self.right_wheel.set_offset(self.cali_forward_B)
+		self.right_wheel.offset = self.cali_forward_B
 		self.forward()
 
 	def cali_ok(self):
@@ -151,11 +154,11 @@ class Back_Wheels(object):
 		self.db.set('forward_B', self.forward_B)
 		self.stop()
 
-if __name__ == '__main__':
+def test():
 	import time
+	back_wheels = Back_Wheels(debug=True)
+	DELAY = 0.01
 	try:
-		back_wheels = Back_Wheels()
-		DELAY = 0.1
 		back_wheels.forward()
 		for i in range(0, 100):
 			back_wheels.speed = i
@@ -179,3 +182,6 @@ if __name__ == '__main__':
 		back_wheels.stop()
 	finally:
 		back_wheels.stop()
+
+if __name__ == '__main__':
+	test()

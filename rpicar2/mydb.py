@@ -1,10 +1,6 @@
 # File based database
 
-pan_offset = 0
-
-tilt_offset = 0
-
-turning_offset = -38
+turning_offset = 0
 
 forward_A = True
 

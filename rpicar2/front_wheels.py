@@ -8,6 +8,7 @@
 * E-mail      : service@sunfounder.com
 * Website     : www.sunfounder.com
 * Update      : Cavon    2016-09-13    New release
+*               Cavon    2016-11-04    fix for submodules
 **********************************************************************
 '''
 import SunFounder_PCA9685.Servo as Servo
@@ -16,9 +17,9 @@ import filedb
 class Front_Wheels(object):
 	''' Front wheels control class '''
 	FRONT_WHEEL_CHANNEL = 0
-	LEFT_ANGLE = 30
+	LEFT_ANGLE = 45
 	STRAIGHT_ANGLE = 90
-	RIGHT_ANGLE = 150
+	RIGHT_ANGLE = 135
 
 	_DEBUG = False
 	_DEBUG_INFO = 'DEBUG "front_wheels.py":'
@@ -117,25 +118,25 @@ class Front_Wheels(object):
 def test():
 	import time
 	front_wheels = Front_Wheels()
-	while True:
-		print "turn_left"
-		front_wheels.turn_left()
-		time.sleep(1)
-		print "turn_straight"
+	try:
+		while True:
+			print "turn_left"
+			front_wheels.turn_left()
+			time.sleep(1)
+			print "turn_straight"
+			front_wheels.turn_straight()
+			time.sleep(1)
+			print "turn_right"
+			front_wheels.turn_right()
+			time.sleep(1)
+			print "turn_straight"
+			front_wheels.turn_straight()
+			time.sleep(1)
+	except KeyboardInterrupt:
 		front_wheels.turn_straight()
-		time.sleep(1)
-		print "turn_right"
-		front_wheels.turn_right()
-		time.sleep(1)
-		print "turn_straight"
-		front_wheels.turn_straight()
-		time.sleep(1)
 
 if __name__ == '__main__':
-	try:
-		test()
-	except KeyboardInterrupt:
-		turn_straight()
+	test()
 
 
 
