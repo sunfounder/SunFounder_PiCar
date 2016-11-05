@@ -51,7 +51,7 @@ setup(
     # pip to create the appropriate form of executable for the target platform.
     entry_points={
         'console_scripts': [
-            'sunfounder-rpi-car2=sunfounderrpicar2:main',
+            'sunfounder-rpicar2=rpicar2:main',
         ],
     },
 )

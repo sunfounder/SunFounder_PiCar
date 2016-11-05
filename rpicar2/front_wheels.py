@@ -24,7 +24,7 @@ class Front_Wheels(object):
 	_DEBUG = False
 	_DEBUG_INFO = 'DEBUG "front_wheels.py":'
 
-	def __init__(self, debug=False, db="config"):
+	def __init__(self, debug=False, db="config", chn=self.FRONT_WHEEL_CHANNEL):
 		''' setup channels and basic stuff '''
 		self.db = filedb.fileDB(db=db)
 		self.turning_offset = int(self.db.get('turning_offset', default_value=0))
@@ -120,9 +120,9 @@ class Front_Wheels(object):
 		self.turning_offset = self.cali_turning_offset
 		self.db.set('turning_offset', self.turning_offset)
 
-def test():
+def test(chn=0):
 	import time
-	front_wheels = Front_Wheels()
+	front_wheels = Front_Wheels(chn)
 	try:
 		while True:
 			print "turn_left"
