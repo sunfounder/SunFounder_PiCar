@@ -24,7 +24,7 @@ class Front_Wheels(object):
 	_DEBUG = False
 	_DEBUG_INFO = 'DEBUG "front_wheels.py":'
 
-	def __init__(self, debug=False, db="config", chn=self.FRONT_WHEEL_CHANNEL):
+	def __init__(self, debug=False, db="config", chn=FRONT_WHEEL_CHANNEL):
 		''' setup channels and basic stuff '''
 		self.db = filedb.fileDB(db=db)
 		self.turning_offset = int(self.db.get('turning_offset', default_value=0))
