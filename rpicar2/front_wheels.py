@@ -24,20 +24,22 @@ class Front_Wheels(object):
 	_DEBUG = False
 	_DEBUG_INFO = 'DEBUG "front_wheels.py":'
 
-	def __init__(self, debug=False, db="config", channel=FRONT_WHEEL_CHANNEL):
+	def __init__(self, debug=False, db="config", channel=v):
 		''' setup channels and basic stuff '''
 		self.db = filedb.fileDB(db=db)
+		self._channel = channel
 		self.turning_offset = int(self.db.get('turning_offset', default_value=0))
 
-		self.wheel = Servo.Servo(self.FRONT_WHEEL_CHANNEL, offset=self.turning_offset)
+		self.wheel = Servo.Servo(self._channel, offset=self.turning_offset)
 		if self._DEBUG:
-			print self._DEBUG_INFO, 'Front wheel PEM channel:', self.FRONT_WHEEL_CHANNEL
+			print self._DEBUG_INFO, 'Front wheel PEM channel:', self._channel
 			print self._DEBUG_INFO, 'Front wheel offset value:', self.turning_offset
 
 		self.angle = {"left":self.LEFT_ANGLE, "straight":self.STRAIGHT_ANGLE, "right":self.RIGHT_ANGLE}
 		self.debug = debug
 		if self._DEBUG:
 			print self._DEBUG_INFO, 'left angle: %s, straight angle: %s, right angle: %s' % (self.angle["left"], self.angle["straight"], self.angle["right"])
+
 
 	def turn_left(self):
 		''' Turn the front wheels left '''
@@ -67,11 +69,16 @@ class Front_Wheels(object):
 			angle = self.angle["right"]
 		self.wheel.write(angle)
 
-	
+	@property
+	def channel(self):
+		return self._channel
+	@channel.setter
+	def channel(self, chn):
+		self._channel = chn
+
 	@property
 	def debug(self):
 		return self._DEBUG
-
 	@debug.setter
 	def debug(self, debug):
 		''' Set if debug information shows '''
