@@ -17,17 +17,16 @@ import filedb
 class Front_Wheels(object):
 	''' Front wheels control class '''
 	FRONT_WHEEL_CHANNEL = 0
-	LEFT_ANGLE = 45
-	STRAIGHT_ANGLE = 90
-	RIGHT_ANGLE = 135
 
 	_DEBUG = False
 	_DEBUG_INFO = 'DEBUG "front_wheels.py":'
 
-	def __init__(self, debug=False, db="config", channel=v):
+	def __init__(self, debug=False, db="config", channel=FRONT_WHEEL_CHANNEL):
 		''' setup channels and basic stuff '''
 		self.db = filedb.fileDB(db=db)
 		self._channel = channel
+		self._straight_angle = 90
+		self.turning_max = 45
 		self.turning_offset = int(self.db.get('turning_offset', default_value=0))
 
 		self.wheel = Servo.Servo(self._channel, offset=self.turning_offset)
@@ -35,38 +34,37 @@ class Front_Wheels(object):
 			print self._DEBUG_INFO, 'Front wheel PEM channel:', self._channel
 			print self._DEBUG_INFO, 'Front wheel offset value:', self.turning_offset
 
-		self.angle = {"left":self.LEFT_ANGLE, "straight":self.STRAIGHT_ANGLE, "right":self.RIGHT_ANGLE}
+		self._angle = {"left":self._min_angle, "straight":self._straight_angle, "right":self._max_angle}
 		self.debug = debug
 		if self._DEBUG:
-			print self._DEBUG_INFO, 'left angle: %s, straight angle: %s, right angle: %s' % (self.angle["left"], self.angle["straight"], self.angle["right"])
-
+			print self._DEBUG_INFO, 'left angle: %s, straight angle: %s, right angle: %s' % (self._angle["left"], self._angle["straight"], self._angle["right"])
 
 	def turn_left(self):
 		''' Turn the front wheels left '''
 		if self._DEBUG:
 			print self._DEBUG_INFO, "Turn left"
-		self.wheel.write(self.angle["left"])
+		self.wheel.write(self._angle["left"])
 
 	def turn_straight(self):
 		''' Turn the front wheels back straight '''
 		if self._DEBUG:
 			print self._DEBUG_INFO, "Turn straight"
-		self.wheel.write(self.angle["straight"])
+		self.wheel.write(self._angle["straight"])
 
 	def turn_right(self):
 		''' Turn the front wheels right '''
 		if self._DEBUG:
 			print self._DEBUG_INFO, "Turn right"
-		self.wheel.write(self.angle["right"])
+		self.wheel.write(self._angle["right"])
 
 	def turn(self, angle):
 		''' Turn the front wheels to the giving angle '''
 		if self._DEBUG:
 			print self._DEBUG_INFO, "Turn to", angle
-		if angle < self.angle["left"]:
-			angle = self.angle["left"]
-		if angle > self.angle["right"]:
-			angle = self.angle["right"]
+		if angle < self._angle["left"]:
+			angle = self._angle["left"]
+		if angle > self._angle["right"]:
+			angle = self._angle["right"]
 		self.wheel.write(angle)
 
 	@property
@@ -75,6 +73,16 @@ class Front_Wheels(object):
 	@channel.setter
 	def channel(self, chn):
 		self._channel = chn
+
+	@property
+	def turning_max(self):
+		return self._turning_max
+
+	@turning_max.setter
+	def turning_max(self, angle):
+		self._turning_max = angle
+		self._min_angle = self._straight_angle - angle
+		self._max_angle = self._straight_angle + angle
 
 	@property
 	def debug(self):
