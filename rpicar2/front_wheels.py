@@ -11,8 +11,8 @@
 *               Cavon    2016-11-04    fix for submodules
 **********************************************************************
 '''
-from rpicar2.SunFounder_PCA9685 import Servo
-from rpicar2 import filedb
+from SunFounder_PCA9685 import Servo
+import filedb
 
 class Front_Wheels(object):
 	''' Front wheels control class '''
@@ -24,7 +24,7 @@ class Front_Wheels(object):
 	_DEBUG = False
 	_DEBUG_INFO = 'DEBUG "front_wheels.py":'
 
-	def __init__(self, debug=False, db="config", chn=FRONT_WHEEL_CHANNEL):
+	def __init__(self, debug=False, db="config", channel=FRONT_WHEEL_CHANNEL):
 		''' setup channels and basic stuff '''
 		self.db = filedb.fileDB(db=db)
 		self.turning_offset = int(self.db.get('turning_offset', default_value=0))
@@ -122,7 +122,7 @@ class Front_Wheels(object):
 
 def test(chn=0):
 	import time
-	front_wheels = Front_Wheels(chn)
+	front_wheels = Front_Wheels(channel=chn)
 	try:
 		while True:
 			print "turn_left"
