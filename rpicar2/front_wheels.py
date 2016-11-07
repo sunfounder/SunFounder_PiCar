@@ -11,8 +11,8 @@
 *               Cavon    2016-11-04    fix for submodules
 **********************************************************************
 '''
-import rpicar2.SunFounder_PCA9685.Servo as Servo
-import rpicar2.filedb
+from rpicar2.SunFounder_PCA9685 import Servo
+from rpicar2 import filedb
 
 class Front_Wheels(object):
 	''' Front wheels control class '''

@@ -12,9 +12,9 @@
 **********************************************************************
 '''
 
-import rpicar2.SunFounder_TB6612.TB6612 as TB6612
-import rpicar2.SunFounder_PCA9685.PCA9685 as PCA9685
-import rpicar2.filedb
+from rpicar2.SunFounder_TB6612 import TB6612
+from rpicar2.SunFounder_PCA9685 import PCA9685
+from rpicar2 import filedb
 
 class Back_Wheels(object):
 	''' Back wheels control class '''
