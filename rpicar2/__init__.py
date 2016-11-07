@@ -6,7 +6,7 @@ def main():
     if len(sys.argv) >= 2:
         if sys.argv[1] == "servo-install":
             if len(sys.argv) >= 3:
-            	print "servo-install takes no value"
+                print "servo-install takes no value"
                 usage()
             Servo.install()
         elif sys.argv[1] == "front-wheel-test":
@@ -14,12 +14,12 @@ def main():
                 try:
                     chn = int(sys.argv[2])
                 except:
-            		print "chn must be integer"
+                    print "chn must be integer"
                     usage()
                 if 0 <= chn <= 15 :
                     front_wheels.test(chn)
                 else:
-            		print 'chn must be in 0~15, not "%s"' % chn
+                    print 'chn must be in 0~15, not "%s"' % chn
                     usage()
             front_wheels.test()
         else:
