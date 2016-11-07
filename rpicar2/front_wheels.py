@@ -12,7 +12,7 @@
 **********************************************************************
 '''
 import rpicar2.SunFounder_PCA9685.Servo as Servo
-import filedb
+import rpicar2.filedb
 
 class Front_Wheels(object):
 	''' Front wheels control class '''
