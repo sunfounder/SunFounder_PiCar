@@ -1,20 +1,22 @@
-## SunFounder Raspberry Pi Car V2.0
-Raspberry Pi Car V2.0
+## SunFounder PiCar
+SunFounder PiCar
 
 Quick Links:
 
- * [About Raspberry Pi Car V2.0](#about_this_repo)
+ * [About PiCar](#about_this_repo)
  * [Update](#update)
  * [About SunFounder](#about_sunfounder)
  * [License](#license)
  * [Contact us](#contact_us)
 
 <a id="about_this_{thing}"></a>
-### About Raspberry Pi Car V2.0:
-This is a basic control module for [Smart Video Car Kit V2.0](https://github.com/sunfounder/SunFounder_Smart_Video_Car_Kit_V2.0_for_Raspberry_Pi) and [SunFounder Smart Sensor Car Kit](https://github.com/sunfounder/SunFounder_Smart_Sensor_Car_Kitfor_Raspberry_Pi)
+### About PiCar:
+This is a basic control module for [PiCar V](https://github.com/sunfounder/SunFounder_Smart_Video_Car_Kit_V2.0_for_Raspberry_Pi) and [PiCar S](https://github.com/sunfounder/SunFounder_Smart_Sensor_Car_Kitfor_Raspberry_Pi)
 
 <a id="update"></a>
 ### Update:
+2016-11-16:
+ - Change name to PiCar
 2016-11-04:
  - New Release
 
@@ -28,13 +30,13 @@ SunFounder is a technology company focused on Raspberry Pi and Arduino open sour
 ### License
 This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
 
-This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied wa rranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
-{Repository Name} comes with ABSOLUTELY NO WARRANTY; for details run ./show w. This is free software, and you are welcome to redistribute it under certain conditions; run ./show c for details.
+SunFounder PiCar comes with ABSOLUTELY NO WARRANTY; for details run ./show w. This is free software, and you are welcome to redistribute it under certain conditions; run ./show c for details.
 
-SunFounder, Inc., hereby disclaims all copyright interest in the program '{Repository Name}' (which makes passes at compilers).
+SunFounder, Inc., hereby disclaims all copyright interest in the program 'SunFounder PiCar' (which makes passes at compilers).
 
 Mike Huang, 21 August 2015
 

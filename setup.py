@@ -18,11 +18,11 @@ with open(path.join(here, 'DESCRIPTION.rst'), encoding='utf-8') as f:
     long_description = f.read()
 
 setup(
-    name='SunFounderRPiCar2',
+    name='SunFounder_PiCar',
     version='1.0.0',
-    description='SunFounder Raspberry Pi Car V2',
+    description='SunFounder PiCar',
     long_description=long_description,
-    url='https://github.com/sunfounder/SunFounder_Raspberry_Pi_Car_V2.0',
+    url='https://github.com/sunfounder/SunFounder_PiCar',
     author='SunFounder',
     author_email='support@sunfounder.com',
     license='GNU',
@@ -51,7 +51,7 @@ setup(
     # pip to create the appropriate form of executable for the target platform.
     entry_points={
         'console_scripts': [
-            'sunfounder-rpicar2=rpicar2:main',
+            'picar=picar:main',
         ],
     },
 )

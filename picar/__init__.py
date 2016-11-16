@@ -1,6 +1,6 @@
 import sys
 import front_wheels
-from rpicar2.SunFounder_PCA9685 import Servo
+from SunFounder_PCA9685 import Servo
 
 def main():
     if len(sys.argv) >= 2:
@@ -29,7 +29,7 @@ def main():
         usage()
 
 def usage():
-    print "Usage:  sunfounder-rpicar2 [Command] [value]"
+    print "Usage:  picar [Command] [value]"
     print "Commands:"
     print "  servo-install              Set 16 channel servos to 90 degree for installation"
     print "  front-wheel-test [chn]     Test the steering servo connect to chn, chn default 0"
