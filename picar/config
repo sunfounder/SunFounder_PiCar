@@ -2,8 +2,8 @@
 
 turning_offset = 0
 
-forward_A = True
+forward_A = 1
 
-forward_B = True
+forward_B = 1
 
 
