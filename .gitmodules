@@ -1,6 +1,6 @@
-[submodule "rpicar2/SunFounder_PCA9685"]
-	path = rpicar2/SunFounder_PCA9685
+[submodule "picar/SunFounder_PCA9685"]
+	path = picar/SunFounder_PCA9685
 	url = https://github.com/sunfounder/SunFounder_PCA9685.git
-[submodule "rpicar2/SunFounder_TB6612"]
-	path = rpicar2/SunFounder_TB6612
+[submodule "picar/SunFounder_TB6612"]
+	path = picar/SunFounder_TB6612
 	url = https://github.com/sunfounder/SunFounder_TB6612.git
