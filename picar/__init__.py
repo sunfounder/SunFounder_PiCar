@@ -1,5 +1,6 @@
 import sys
 import front_wheels
+import back_wheels
 from SunFounder_PCA9685 import Servo
 
 def main():
@@ -22,6 +23,8 @@ def main():
                     print 'chn must be in 0~15, not "%s"' % chn
                     usage()
             front_wheels.test()
+        elif sys.argv[1] == "rear-wheel-test":
+            back_wheels.test()
         else:
             print 'Command error, "%s" is not in list' % sys.argv[1]
             usage()
@@ -33,4 +36,5 @@ def usage():
     print "Commands:"
     print "  servo-install              Set 16 channel servos to 90 degree for installation"
     print "  front-wheel-test [chn]     Test the steering servo connect to chn, chn default 0"
+    print "  rear-wheel-test            Test the rear wheel"
     quit()

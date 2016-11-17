@@ -162,21 +162,21 @@ def test():
 		back_wheels.forward()
 		for i in range(0, 100):
 			back_wheels.speed = i
-			print "Speed =", i
+			print "Forward, speed =", i
 			time.sleep(DELAY)
 		for i in range(100, 0, -1):
 			back_wheels.speed = i
-			print "Speed =", i
+			print "Forward, speed =", i
 			time.sleep(DELAY)
 
 		back_wheels.backward()
 		for i in range(0, 100):
 			back_wheels.speed = i
-			print "Speed =", i
+			print "Backward, speed =", i
 			time.sleep(DELAY)
 		for i in range(100, 0, -1):
 			back_wheels.speed = i
-			print "Speed =", i
+			print "Backward, speed =", i
 			time.sleep(DELAY)
 	except KeyboardInterrupt:
 		back_wheels.stop()
