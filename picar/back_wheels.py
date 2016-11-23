@@ -156,7 +156,7 @@ class Back_Wheels(object):
 
 def test():
 	import time
-	back_wheels = Back_Wheels(debug=True)
+	back_wheels = Back_Wheels()
 	DELAY = 0.01
 	try:
 		back_wheels.forward()
