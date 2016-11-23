@@ -2,6 +2,7 @@ import sys
 import front_wheels
 import back_wheels
 from SunFounder_PCA9685 import Servo
+import PCF8591
 
 def main():
     if len(sys.argv) >= 2:
@@ -38,3 +39,6 @@ def usage():
     print "  front-wheel-test [chn]     Test the steering servo connect to chn, chn default 0"
     print "  rear-wheel-test            Test the rear wheel"
     quit()
+
+class ADC(PCF8591.PCF8591):
+    pass

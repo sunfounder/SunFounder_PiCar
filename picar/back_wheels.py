@@ -179,8 +179,10 @@ def test():
 			print "Backward, speed =", i
 			time.sleep(DELAY)
 	except KeyboardInterrupt:
+		print "KeyboardInterrupt, motor stop"
 		back_wheels.stop()
 	finally:
+		print "Finished, motor stop"
 		back_wheels.stop()
 
 if __name__ == '__main__':
