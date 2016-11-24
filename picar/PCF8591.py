@@ -24,10 +24,9 @@ class PCF8591(object):
 	RPI_REVISION_2 = ["a01041", "a21041"]
 	RPI_REVISION_3 = ["a02082", "a22082"]
 
-	AD_CHANNEL = [0x43, 0x42, 0x41, 0x40]
+	self.AD_CHANNEL = [0x43, 0x42, 0x41, 0x40]
 
 	def __init__(self, address=0x48, bus_number=None):
-		super(PCF8591, self).__init__()
 		self.address = address
 		if bus_number == None:
 			self._bus_number = self._get_bus_number()
@@ -36,22 +35,22 @@ class PCF8591(object):
 		self.bus = smbus.SMBus(self._bus_number)
 
 	def read(self, chn): #channel
-		self.bus.write_byte(self.address, AD_CHANNEL[chn])
+		self.bus.write_byte(self.address, self.AD_CHANNEL[chn])
 		self.bus.read_byte(self.address) # dummy read to start conversion
 		return self.bus.read_byte(self.address)
 
 	@property
 	def A0(self):
-		return read(0)
+		return self.read(0)
 	@property
 	def A1(self):
-		return read(1)
+		return self.read(1)
 	@property
 	def A2(self):
-		return read(2)
+		return self.read(2)
 	@property
 	def A3(self):
-		return read(3)
+		return self.read(3)
 
 	def _get_bus_number(self):
 		"Gets the version number of the Raspberry Pi board"
