@@ -3,6 +3,7 @@ import front_wheels
 import back_wheels
 from SunFounder_PCA9685 import Servo
 import PCF8591
+from SunFounder_PCA9685 import PCA9685
 
 def main():
     if len(sys.argv) >= 2:
@@ -42,3 +43,8 @@ def usage():
 
 class ADC(PCF8591.PCF8591):
     pass
+
+def pwm_board_setup():
+    pwm=PCA9685.PWM()
+    pwm.setup()
+    pwm.frequency = 60
