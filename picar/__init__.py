@@ -44,7 +44,7 @@ def usage():
 class ADC(PCF8591.PCF8591):
     pass
 
-def pwm_board_setup():
+def setup():
     pwm=PCA9685.PWM()
     pwm.setup()
     pwm.frequency = 60
