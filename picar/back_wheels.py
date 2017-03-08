@@ -41,7 +41,6 @@ class Back_Wheels(object):
 		self.right_wheel = TB6612.Motor(self.Motor_B, offset=self.forward_B)
 
 		self.pwm = PCA9685.PWM()
-		self.pwm.frequence = 60
 		def _set_a_pwm(value):
 			pulse_wide = self.pwm.map(value, 0, 100, 0, 4095)
 			self.pwm.write(self.PWM_A, 0, pulse_wide)

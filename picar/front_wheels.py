@@ -26,16 +26,16 @@ class Front_Wheels(object):
 		self.db = filedb.fileDB(db=db)
 		self._channel = channel
 		self._straight_angle = 90
-		self.turning_max = 30
+		self.turning_max = 20
 		self.turning_offset = int(self.db.get('turning_offset', default_value=0))
 
 		self.wheel = Servo.Servo(self._channel, offset=self.turning_offset)
+		self.debug = debug
 		if self._DEBUG:
-			print self._DEBUG_INFO, 'Front wheel PEM channel:', self._channel
+			print self._DEBUG_INFO, 'Front wheel PWM channel:', self._channel
 			print self._DEBUG_INFO, 'Front wheel offset value:', self.turning_offset
 
 		self._angle = {"left":self._min_angle, "straight":self._straight_angle, "right":self._max_angle}
-		self.debug = debug
 		if self._DEBUG:
 			print self._DEBUG_INFO, 'left angle: %s, straight angle: %s, right angle: %s' % (self._angle["left"], self._angle["straight"], self._angle["right"])
 
