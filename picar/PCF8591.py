@@ -24,7 +24,7 @@ class PCF8591(object):
 	RPI_REVISION_2 = ["a01041", "a21041"]
 	RPI_REVISION_3 = ["a02082", "a22082"]
 
-	self.AD_CHANNEL = [0x43, 0x42, 0x41, 0x40]
+	AD_CHANNEL = [0x43, 0x42, 0x41, 0x40]
 
 	def __init__(self, address=0x48, bus_number=None):
 		self.address = address
