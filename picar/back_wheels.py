@@ -18,8 +18,8 @@ import filedb
 
 class Back_Wheels(object):
 	''' Back wheels control class '''
-	Motor_A = 23
-	Motor_B = 24
+	Motor_A = 17
+	Motor_B = 27
 
 	PWM_A = 4
 	PWM_B = 5
