@@ -26,6 +26,7 @@ setup(
     author='SunFounder',
     author_email='support@sunfounder.com',
     license='GNU',
+    zip_safe=False,
     classifiers=[
         # How mature is this project? Common values are
         #   3 - Alpha
