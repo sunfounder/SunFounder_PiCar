@@ -83,6 +83,7 @@ class Front_Wheels(object):
 		self._turning_max = angle
 		self._min_angle = self._straight_angle - angle
 		self._max_angle = self._straight_angle + angle
+		self._angle = {"left":self._min_angle, "straight":self._straight_angle, "right":self._max_angle}
 
 	@property
 	def debug(self):
