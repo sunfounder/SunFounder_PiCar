@@ -27,7 +27,7 @@ class Front_Wheels(object):
 		self._channel = channel
 		self._straight_angle = 90
 		self.turning_max = 20
-		self.turning_offset = int(self.db.get('turning_offset', default_value=0))
+		self._turning_offset = int(self.db.get('turning_offset', default_value=0))
 
 		self.wheel = Servo.Servo(self._channel, offset=self.turning_offset)
 		self.debug = debug
@@ -84,6 +84,19 @@ class Front_Wheels(object):
 		self._min_angle = self._straight_angle - angle
 		self._max_angle = self._straight_angle + angle
 		self._angle = {"left":self._min_angle, "straight":self._straight_angle, "right":self._max_angle}
+
+	@property
+	def turning_offset(self):
+		return self._turning_offset
+
+	@turning_offset.setter
+	def turning_offset(self, value):
+		if not isinstance(value, int):
+			raise TypeError('"turning_offset" must be "int"')
+		self._turning_offset = value
+		self.db.set('turning_offset', value)
+		self.wheel.offset = value
+		self.turn_straight()
 
 	@property
 	def debug(self):
