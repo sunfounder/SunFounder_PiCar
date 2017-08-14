@@ -27,7 +27,7 @@ class Back_Wheels(object):
 	_DEBUG = False
 	_DEBUG_INFO = 'DEBUG "back_wheels.py":'
 
-	def __init__(self, debug=False, db="config"):
+	def __init__(self, debug=False, bus_number=1, db="config"):
 		''' Init the direction channel and pwm channel '''
 		self.forward_A = True
 		self.forward_B = True
@@ -40,7 +40,7 @@ class Back_Wheels(object):
 		self.left_wheel = TB6612.Motor(self.Motor_A, offset=self.forward_A)
 		self.right_wheel = TB6612.Motor(self.Motor_B, offset=self.forward_B)
 
-		self.pwm = PCA9685.PWM()
+		self.pwm = PCA9685.PWM(bus_number=bus_number)
 		def _set_a_pwm(value):
 			pulse_wide = self.pwm.map(value, 0, 100, 0, 4095)
 			self.pwm.write(self.PWM_A, 0, pulse_wide)

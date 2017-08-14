@@ -21,7 +21,7 @@ class Front_Wheels(object):
 	_DEBUG = False
 	_DEBUG_INFO = 'DEBUG "front_wheels.py":'
 
-	def __init__(self, debug=False, db="config", channel=FRONT_WHEEL_CHANNEL):
+	def __init__(self, debug=False, db="config", bus_number=1, channel=FRONT_WHEEL_CHANNEL):
 		''' setup channels and basic stuff '''
 		self.db = filedb.fileDB(db=db)
 		self._channel = channel
