@@ -12,7 +12,12 @@ def main():
             if len(sys.argv) >= 3:
                 print "servo-install takes no value"
                 usage()
-            Servo.install()
+            servo0 = Servo(0, bus_number=1)
+            servo1 = Servo(1, bus_number=1)
+            servo2 = Servo(2, bus_number=1)
+            servo0.write(90)
+            servo1.write(90)
+            servo2.write(90)
         elif sys.argv[1] == "front-wheel-test":
             if len(sys.argv) >= 3:
                 try:
@@ -46,6 +51,6 @@ class ADC(PCF8591.PCF8591):
     pass
 
 def setup():
-    pwm=PCA9685.PWM()
+    pwm=PCA9685.PWM(bus_number=1)
     pwm.setup()
     pwm.frequency = 60
