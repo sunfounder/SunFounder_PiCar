@@ -12,9 +12,9 @@ def main():
             if len(sys.argv) >= 3:
                 print "servo-install takes no value"
                 usage()
-            servo0 = Servo(0, bus_number=1)
-            servo1 = Servo(1, bus_number=1)
-            servo2 = Servo(2, bus_number=1)
+            servo0 = Servo.Servo(0, bus_number=1)
+            servo1 = Servo.Servo(1, bus_number=1)
+            servo2 = Servo.Servo(2, bus_number=1)
             servo0.write(90)
             servo1.write(90)
             servo2.write(90)
