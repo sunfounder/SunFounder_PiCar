@@ -12,6 +12,7 @@ def main():
             if len(sys.argv) >= 3:
                 print "servo-install takes no value"
                 usage()
+            print("Servo now is set to 90 degree.")
             servo0 = Servo.Servo(0, bus_number=1)
             servo1 = Servo.Servo(1, bus_number=1)
             servo2 = Servo.Servo(2, bus_number=1)
