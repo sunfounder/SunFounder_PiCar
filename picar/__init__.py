@@ -5,20 +5,45 @@ from SunFounder_PCA9685 import Servo
 import PCF8591
 from SunFounder_PCA9685 import PCA9685
 
+def servo_install():
+    import time
+    delay = 1.0/180
+    if len(sys.argv) >= 3:
+        print "servo-install takes no value"
+        usage()
+    print("Servo now is set to 90 degree.")
+    servo0 = Servo.Servo(0, bus_number=1)
+    servo1 = Servo.Servo(1, bus_number=1)
+    servo2 = Servo.Servo(2, bus_number=1)
+    for i in range(90, -1, -1):
+        servo0.write(i)
+        servo1.write(i)
+        servo2.write(i)
+        time.sleep(delay)
+    time.sleep(0.1)
+    for i in range(0, 181, 1):
+        servo0.write(i)
+        servo1.write(i)
+        servo2.write(i)
+        time.sleep(delay)
+    time.sleep(0.1)
+    for i in range(180, 89, -1):
+        servo0.write(i)
+        servo1.write(i)
+        servo2.write(i)
+        time.sleep(delay)
+    time.sleep(0.1)
+    servo0.write(90)
+    servo1.write(90)
+    servo2.write(90)
+    while True:
+        time.sleep(1)
+
 def main():
     setup()
     if len(sys.argv) >= 2:
         if sys.argv[1] == "servo-install":
-            if len(sys.argv) >= 3:
-                print "servo-install takes no value"
-                usage()
-            print("Servo now is set to 90 degree.")
-            servo0 = Servo.Servo(0, bus_number=1)
-            servo1 = Servo.Servo(1, bus_number=1)
-            servo2 = Servo.Servo(2, bus_number=1)
-            servo0.write(90)
-            servo1.write(90)
-            servo2.write(90)
+            servo_install()
         elif sys.argv[1] == "front-wheel-test":
             if len(sys.argv) >= 3:
                 try:
