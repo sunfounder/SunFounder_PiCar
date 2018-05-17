@@ -18,6 +18,15 @@ class PCF8591(object):
 	""" Light_Follow Module class """
 	AD_CHANNEL = [0x43, 0x42, 0x41, 0x40]
 
+    RPI_REVISION_0 = ["900092"]
+    RPI_REVISION_1_MODULE_B  = ["Beta", "0002", "0003", "0004", "0005", "0006", "000d", "000e", "000f"]
+    RPI_REVISION_1_MODULE_A  = ["0007", "0008", "0009",]
+    RPI_REVISION_1_MODULE_BP = ["0010", "0013"]
+    RPI_REVISION_1_MODULE_AP = ["0012"]
+    RPI_REVISION_2_MODULE_B  = ["a01041", "a21041"]
+    RPI_REVISION_3_MODULE_B  = ["a02082", "a22082"]
+    RPI_REVISION_3_MODULE_BP = ["a020d3"]
+
 	def __init__(self, address=0x48, bus_number=1):
 		self.address = address
 		self._bus_number = bus_number
@@ -41,36 +50,61 @@ class PCF8591(object):
 	def A3(self):
 		return self.read(3)
 
-	def _get_bus_number(self):
-		"Gets the version number of the Raspberry Pi board"
-		# Courtesy quick2wire-python-api
-		# https://github.com/quick2wire/quick2wire-python-api
-		# Updated revision info from: http://elinux.org/RPi_HardwareHistory#Board_Revision_History
-		try:
-			f = open('/proc/cpuinfo','r')
-			for line in f:
-				if line.startswith('Revision'):
-					if line[11:-1] in self.RPI_REVISION_0:
-						return 0
-					elif line[11:-1] in self.RPI_REVISION_1_MODULE_B:
-						return 0
-					elif line[11:-1] in self.RPI_REVISION_1_MODULE_A:
-						return 0
-					elif line[11:-1] in self.RPI_REVISION_1_MODULE_BP:
-						return 1
-					elif line[11:-1] in self.RPI_REVISION_1_MODULE_AP:
-						return 0
-					elif line[11:-1] in self.RPI_REVISION_2:
-						return 1
-					elif line[11:-1] in self.RPI_REVISION_3:
-						return 1
-					else:
-						return line[11:-1]
-		except:
-			f.close()
-			return 'Open file error'
-		finally:
-			f.close()
+    def _get_bus_number(self):
+        pi_revision = self._get_pi_revision()
+        if   pi_revision == '0':
+            return 0
+        elif pi_revision == '1 Module B':
+            return 0
+        elif pi_revision == '1 Module A':
+            return 0
+        elif pi_revision == '1 Module B+':
+            return 1
+        elif pi_revision == '1 Module A+':
+            return 0
+        elif pi_revision == '2 Module B':
+            return 1
+        elif pi_revision == '3 Module B':
+            return 1
+        elif pi_revision == '3 Module B+':
+            return 1
+
+    def _get_pi_revision(self):
+        "Gets the version number of the Raspberry Pi board"
+        # Courtesy quick2wire-python-api
+        # https://github.com/quick2wire/quick2wire-python-api
+        # Updated revision info from: http://elinux.org/RPi_HardwareHistory#Board_Revision_History
+        try:
+            f = open('/proc/cpuinfo','r')
+            for line in f:
+                if line.startswith('Revision'):
+                    if line[11:-1] in self.RPI_REVISION_0:
+                        return '0'
+                    elif line[11:-1] in self.RPI_REVISION_1_MODULE_B:
+                        return '1 Module B'
+                    elif line[11:-1] in self.RPI_REVISION_1_MODULE_A:
+                        return '1 Module A'
+                    elif line[11:-1] in self.RPI_REVISION_1_MODULE_BP:
+                        return '1 Module B+'
+                    elif line[11:-1] in self.RPI_REVISION_1_MODULE_AP:
+                        return '1 Module A+'
+                    elif line[11:-1] in self.RPI_REVISION_2_MODULE_B:
+                        return '2 Module B'
+                    elif line[11:-1] in self.RPI_REVISION_3_MODULE_B:
+                        return '3 Module B'
+                    elif line[11:-1] in self.RPI_REVISION_3_MODULE_BP:
+                        return '3 Module B+'
+                    else:
+                        print "Error. Pi revision didn't recognize, module number: %s" % line[11:-1]
+                        print 'Exiting...'
+                        quit()
+        except Exception, e:
+            f.close()
+            print e
+            print 'Exiting...'
+            quit()
+        finally:
+            f.close()
 
 def test():
 	ADC = PCF8591(0x48)
