@@ -16,22 +16,11 @@ import time
 
 class PCF8591(object):
 	""" Light_Follow Module class """
-	RPI_REVISION_0 = ["900092"]
-	RPI_REVISION_1_MODULE_B = ["Beta", "0002", "0003", "0004", "0005", "0006", "000d", "000e", "000f"]
-	RPI_REVISION_1_MODULE_A = ["0007", "0008", "0009",]
-	RPI_REVISION_1_MODULE_BP = ["0010", "0013"]
-	RPI_REVISION_1_MODULE_AP = ["0012"]
-	RPI_REVISION_2 = ["a01041", "a21041"]
-	RPI_REVISION_3 = ["a02082", "a22082"]
-
 	AD_CHANNEL = [0x43, 0x42, 0x41, 0x40]
 
-	def __init__(self, address=0x48, bus_number=None):
+	def __init__(self, address=0x48, bus_number=1):
 		self.address = address
-		if bus_number == None:
-			self._bus_number = self._get_bus_number()
-		else:
-			self._bus_number = bus_number
+		self._bus_number = bus_number
 		self.bus = smbus.SMBus(self._bus_number)
 
 	def read(self, chn): #channel
