@@ -36,8 +36,8 @@ def servo_install():
     servo0.write(90)
     servo1.write(90)
     servo2.write(90)
-    while True:
-        time.sleep(1)
+#    while True:
+#        time.sleep(1)
 
 def main():
     setup()
