@@ -26,7 +26,7 @@ class Front_Wheels(object):
 		self.db = filedb.fileDB(db=db)
 		self._channel = channel
 		self._straight_angle = 90
-		self.turning_max = 20
+		self.turning_max = 45
 		self._turning_offset = int(self.db.get('turning_offset', default_value=0))
 
 		self.wheel = Servo.Servo(self._channel, bus_number=bus_number, offset=self.turning_offset)

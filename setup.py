@@ -19,7 +19,7 @@ with open(path.join(here, 'DESCRIPTION.rst'), encoding='utf-8') as f:
 
 setup(
     name='SunFounder_PiCar',
-    version='1.0.0',
+    version='1.0.1',
     description='SunFounder PiCar',
     long_description=long_description,
     url='https://github.com/sunfounder/SunFounder_PiCar',
