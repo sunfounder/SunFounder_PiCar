@@ -1,6 +1,6 @@
 [submodule "SunFounder_PCA9685"]
 	path = picar/SunFounder_PCA9685
 	url = https://github.com/sunfounder/SunFounder_PCA9685.git
-[submodule "SunFounder_TB6612"]
+[submodule "picar/SunFounder_TB6612"]
 	path = picar/SunFounder_TB6612
-	url = https://github.com/sunfounder/SunFounder_TB6612.git
+	url = https://github.com/sunfounder/SunFounder_TB6612
