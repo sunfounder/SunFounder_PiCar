@@ -95,13 +95,13 @@ class PCF8591(object):
                     elif line[11:-1] in self.RPI_REVISION_3_MODULE_BP:
                         return '3 Module B+'
                     else:
-                        print "Error. Pi revision didn't recognize, module number: %s" % line[11:-1]
-                        print 'Exiting...'
+                        print("Error. Pi revision didn't recognize, module number: %s" % line[11:-1])
+                        print('Exiting...')
                         quit()
-        except Exception, e:
+        except Exception as e:
             f.close()
-            print e
-            print 'Exiting...'
+            print(e)
+            print('Exiting...')
             quit()
         finally:
             f.close()
@@ -113,7 +113,7 @@ def test():
         A1 = ADC.read(1)
         A2 = ADC.read(2)
 
-        print "A0 = %d  A1 = %d  A2 = %d"%(A0,A1,A2)
+        print("A0 = %d  A1 = %d  A2 = %d"%(A0,A1,A2))
         time.sleep(0.5)
 
 def destroy():

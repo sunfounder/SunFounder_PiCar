@@ -12,9 +12,9 @@
 **********************************************************************
 '''
 
-from SunFounder_TB6612 import TB6612
-from SunFounder_PCA9685 import PCA9685
-import filedb
+from .SunFounder_TB6612 import TB6612
+from .SunFounder_PCA9685 import PCA9685
+from . import filedb
 
 class Back_Wheels(object):
 	''' Back wheels control class '''
@@ -42,11 +42,11 @@ class Back_Wheels(object):
 
 		self.pwm = PCA9685.PWM(bus_number=bus_number)
 		def _set_a_pwm(value):
-			pulse_wide = self.pwm.map(value, 0, 100, 0, 4095)
+			pulse_wide = int(self.pwm.map(value, 0, 100, 0, 4095))
 			self.pwm.write(self.PWM_A, 0, pulse_wide)
 
 		def _set_b_pwm(value):
-			pulse_wide = self.pwm.map(value, 0, 100, 0, 4095)
+			pulse_wide = int(self.pwm.map(value, 0, 100, 0, 4095))
 			self.pwm.write(self.PWM_B, 0, pulse_wide)
 
 		self.left_wheel.pwm  = _set_a_pwm
@@ -55,30 +55,30 @@ class Back_Wheels(object):
 		self._speed = 0
 
 		self.debug = debug
+		self._debug_('Set left wheel to #%d, PWM channel to %d' % (self.Motor_A, self.PWM_A))
+		self._debug_('Set right wheel to #%d, PWM channel to %d' % (self.Motor_B, self.PWM_B))
+
+	def _debug_(self,message):
 		if self._DEBUG:
-			print self._DEBUG_INFO, 'Set left wheel to #%d, PWM channel to %d' % (self.Motor_A, self.PWM_A)
-			print self._DEBUG_INFO, 'Set right wheel to #%d, PWM channel to %d' % (self.Motor_B, self.PWM_B)
+			print(self._DEBUG_INFO,message)
 
 	def forward(self):
 		''' Move both wheels forward '''
 		self.left_wheel.forward()
 		self.right_wheel.forward()
-		if self._DEBUG:
-			print self._DEBUG_INFO, 'Running forward'
+		self._debug_('Running forward')
 
 	def backward(self):
 		''' Move both wheels backward '''
 		self.left_wheel.backward()
 		self.right_wheel.backward()
-		if self._DEBUG:
-			print self._DEBUG_INFO, 'Running backward'
+		self._debug_('Running backward')
 
 	def stop(self):
 		''' Stop both wheels '''
 		self.left_wheel.stop()
 		self.right_wheel.stop()
-		if self._DEBUG:
-			print self._DEBUG_INFO, 'Stop'
+		self._debug_('Stop')
 
 	@property
 	def speed(self, speed):
@@ -90,8 +90,7 @@ class Back_Wheels(object):
 		''' Set moving speeds '''
 		self.left_wheel.speed = self._speed
 		self.right_wheel.speed = self._speed
-		if self._DEBUG:
-			print self._DEBUG_INFO, 'Set speed to', self._speed
+		self._debug_('Set speed to %s' % self._speed)
 
 	@property
 	def debug(self):
@@ -106,28 +105,26 @@ class Back_Wheels(object):
 			raise ValueError('debug must be "True" (Set debug on) or "False" (Set debug off), not "{0}"'.format(debug))
 
 		if self._DEBUG:
-			print self._DEBUG_INFO, "Set debug on"
+			print(self._DEBUG_INFO, "Set debug on")
 			self.left_wheel.debug = True
 			self.right_wheel.debug = True
 			self.pwm.debug = True
 		else:
-			print self._DEBUG_INFO, "Set debug off"
+			print(self._DEBUG_INFO, "Set debug off")
 			self.left_wheel.debug = False
 			self.right_wheel.debug = False
 			self.pwm.debug = False
 
 	def ready(self):
 		''' Get the back wheels to the ready position. (stop) '''
-		if self._DEBUG:
-			print self._DEBUG_INFO, 'Turn to "Ready" position'
+		self._debug_('Turn to "Ready" position')
 		self.left_wheel.offset = self.forward_A
 		self.right_wheel.offset = self.forward_B
 		self.stop()
 
 	def calibration(self):
 		''' Get the front wheels to the calibration position. '''
-		if self._DEBUG:
-			print self._DEBUG_INFO, 'Turn to "Calibration" position'
+		self._debug_('Turn to "Calibration" position')
 		self.speed = 50
 		self.forward()
 		self.cali_forward_A = self.forward_A
@@ -161,27 +158,27 @@ def test():
 		back_wheels.forward()
 		for i in range(0, 100):
 			back_wheels.speed = i
-			print "Forward, speed =", i
+			print("Forward, speed =", i)
 			time.sleep(DELAY)
 		for i in range(100, 0, -1):
 			back_wheels.speed = i
-			print "Forward, speed =", i
+			print("Forward, speed =", i)
 			time.sleep(DELAY)
 
 		back_wheels.backward()
 		for i in range(0, 100):
 			back_wheels.speed = i
-			print "Backward, speed =", i
+			print("Backward, speed =", i)
 			time.sleep(DELAY)
 		for i in range(100, 0, -1):
 			back_wheels.speed = i
-			print "Backward, speed =", i
+			print("Backward, speed =", i)
 			time.sleep(DELAY)
 	except KeyboardInterrupt:
-		print "KeyboardInterrupt, motor stop"
+		print("KeyboardInterrupt, motor stop")
 		back_wheels.stop()
 	finally:
-		print "Finished, motor stop"
+		print("Finished, motor stop")
 		back_wheels.stop()
 
 if __name__ == '__main__':

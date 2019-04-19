@@ -1,15 +1,15 @@
 import sys
-import front_wheels
-import back_wheels
-from SunFounder_PCA9685 import Servo
-import PCF8591
-from SunFounder_PCA9685 import PCA9685
+from . import front_wheels
+from . import back_wheels
+from .SunFounder_PCA9685 import Servo
+from . import PCF8591
+from .SunFounder_PCA9685 import PCA9685
 
 def servo_install():
     import time
     delay = 1.0/180
     if len(sys.argv) >= 3:
-        print "servo-install takes no value"
+        print("servo-install takes no value")
         usage()
     print("Servo now is set to 90 degree.")
     servo0 = Servo.Servo(0, bus_number=1)
@@ -49,28 +49,28 @@ def main():
                 try:
                     chn = int(sys.argv[2])
                 except:
-                    print "chn must be integer"
+                    print("chn must be integer")
                     usage()
                 if 0 <= chn <= 15 :
                     front_wheels.test(chn)
                 else:
-                    print 'chn must be in 0~15, not "%s"' % chn
+                    print('chn must be in 0~15, not "%s"' % chn)
                     usage()
             front_wheels.test()
         elif sys.argv[1] == "rear-wheel-test":
             back_wheels.test()
         else:
-            print 'Command error, "%s" is not in list' % sys.argv[1]
+            print('Command error, "%s" is not in list' % sys.argv[1])
             usage()
     else:
         usage()
 
 def usage():
-    print "Usage:  picar [Command] [value]"
-    print "Commands:"
-    print "  servo-install              Set 16 channel servos to 90 degree for installation"
-    print "  front-wheel-test [chn]     Test the steering servo connect to chn, chn default 0"
-    print "  rear-wheel-test            Test the rear wheel"
+    print("Usage:  picar [Command] [value]")
+    print("Commands:")
+    print("  servo-install              Set 16 channel servos to 90 degree for installation")
+    print("  front-wheel-test [chn]     Test the steering servo connect to chn, chn default 0")
+    print("  rear-wheel-test            Test the rear wheel")
     quit()
 
 class ADC(PCF8591.PCF8591):
