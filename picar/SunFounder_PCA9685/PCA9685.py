@@ -111,7 +111,7 @@ class PWM(object):
         addresses = []
         for tmp_addresses in outputs:
             tmp_addresses = tmp_addresses.split(':')
-            if (tmp_addresses) < 2:
+            if len(tmp_addresses) < 2:
                 continue
             else:
                 tmp_addresses = tmp_addresses[1]
