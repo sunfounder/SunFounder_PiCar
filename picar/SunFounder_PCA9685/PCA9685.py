@@ -110,7 +110,11 @@ class PWM(object):
         outputs = output.split('\n')[1:]
         addresses = []
         for tmp_addresses in outputs:
-            tmp_addresses = tmp_addresses.split(':')[1]
+            tmp_addresses = tmp_addresses.split(':')
+            if (tmp_addresses) < 2:
+                continue
+            else:
+                tmp_addresses = tmp_addresses[1]
             tmp_addresses = tmp_addresses.strip().split(' ')
             for address in tmp_addresses:
                 if address != '--':
