@@ -11,8 +11,8 @@
 *               Cavon    2016-11-04    fix for submodules
 **********************************************************************
 '''
-from .SunFounder_PCA9685 import Servo
-from . import filedb
+from SunFounder_PCA9685 import Servo
+import filedb
 
 class Front_Wheels(object):
 	''' Front wheels control class '''
