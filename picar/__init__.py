@@ -2,7 +2,7 @@ import sys
 from .import front_wheels
 from .import back_wheels
 from .SunFounder_PCA9685 import Servo
-import PCF8591
+from .import PCF8591
 from .SunFounder_PCA9685 import PCA9685
 
 def servo_install():
