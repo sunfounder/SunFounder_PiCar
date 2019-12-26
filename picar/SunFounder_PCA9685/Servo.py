@@ -24,7 +24,7 @@ class Servo(object):
 	_DEBUG = False
 	_DEBUG_INFO = 'DEBUG "Servo.py":'
 
-	def __init__(self, channel, offset=0, lock=True, bus_number=None, address=0x40):
+	def __init__(self, channel, offset=0, lock=True, bus_number=1, address=0x40):
 		''' Init a servo on specific channel, this offset '''
 		if channel<0 or channel > 16:
 			raise ValueError("Servo channel \"{0}\" is not in (0, 15).".format(channel))
