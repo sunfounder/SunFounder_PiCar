@@ -12,7 +12,7 @@
 **********************************************************************
 '''
 from .SunFounder_PCA9685 import Servo
-from . import filedb
+from .import filedb
 
 class Front_Wheels(object):
 	''' Front wheels control class '''

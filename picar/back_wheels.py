@@ -14,7 +14,7 @@
 
 from .SunFounder_TB6612 import TB6612
 from .SunFounder_PCA9685 import PCA9685
-from . import filedb
+from .import filedb
 
 class Back_Wheels(object):
 	''' Back wheels control class '''
