@@ -51,23 +51,7 @@ class PCF8591(object):
         return self.read(3)
 
     def _get_bus_number(self):
-        pi_revision = self._get_pi_revision()
-        if   pi_revision == '0':
-            return 0
-        elif pi_revision == '1 Module B':
-            return 0
-        elif pi_revision == '1 Module A':
-            return 0
-        elif pi_revision == '1 Module B+':
-            return 1
-        elif pi_revision == '1 Module A+':
-            return 0
-        elif pi_revision == '2 Module B':
-            return 1
-        elif pi_revision == '3 Module B':
-            return 1
-        elif pi_revision == '3 Module B+':
-            return 1
+        return 1
 
     def _get_pi_revision(self):
         "Gets the version number of the Raspberry Pi board"
