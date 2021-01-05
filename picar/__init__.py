@@ -11,7 +11,6 @@ def servo_install():
     if len(sys.argv) >= 3:
         print("servo-install takes no value")
         usage()
-    print("Servo now is set to 90 degree.")
     servoFrontWheel = Servo.Servo(0, bus_number=1)
     servoCamHorizontal = Servo.Servo(1, bus_number=1)
     servoCamVertical = Servo.Servo(2, bus_number=1)
@@ -36,8 +35,8 @@ def servo_install():
     servoFrontWheel.write(90)
     servoCamHorizontal.write(90)
     servoCamVertical.write(90)
-    while True:
-        time.sleep(1)
+    time.sleep(1)
+    print("Servos now are set to 90 degree.")
 
 def main():
     setup()
