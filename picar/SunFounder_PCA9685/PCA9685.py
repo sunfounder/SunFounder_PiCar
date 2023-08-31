@@ -126,7 +126,7 @@ class PWM(object):
             for address in addresses:
                 print("  0x%s" % address)
         if "%02X" % self.address in addresses:
-            print("Wierd, I2C device is connected, Try to run the program again, If problem stills, email this information to support@sunfounder.com")
+            print("Weird, I2C device is connected, Try to run the program again, If problem persists, email this information to support@sunfounder.com")
         else:
             print("Device is missing.")
             print("Check the address or wiring of PCA9685 Server driver, or email this information to support@sunfounder.com")
@@ -176,7 +176,8 @@ class PWM(object):
 
     def map(self, x, in_min, in_max, out_min, out_max):
         '''To map the value from arange to another'''
-        return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min
+        # need to map to int to avoid returning float with Python3 division operator
+        return int((x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min)
 
     @property
     def debug(self):
