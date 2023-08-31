@@ -52,7 +52,7 @@ class PWM(object):
     
     def setup(self):
         '''Init the class with bus_number and address'''
-        self._debug_('Reseting PCA9685 MODE1 (without SLEEP) and MODE2')
+        self._debug_('Resetting PCA9685 MODE1 (without SLEEP) and MODE2')
         self.write_all_value(0, 0)
         self._write_byte_data(self._MODE2, self._OUTDRV)
         self._write_byte_data(self._MODE1, self._ALLCALL)
@@ -119,7 +119,7 @@ class PWM(object):
             for address in tmp_addresses:
                 if address != '--':
                     addresses.append(address)
-        print("Conneceted i2c device:")
+        print("Connected i2c device:")
         if addresses == []:
             print("None")
         else:
